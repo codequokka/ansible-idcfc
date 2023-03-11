@@ -1,0 +1,8 @@
+---
+ansible_ssh_user: root
+
+common:
+  users:
+    - name: nbchk
+      group: nbchk
+      password: "{{ vault_password }}"

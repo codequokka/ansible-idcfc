@@ -1,0 +1,3 @@
+---
+- name: Setup workstation hosts
+  import_playbook: workstations.yml

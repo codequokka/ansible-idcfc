@@ -1,0 +1,20 @@
+---
+- name: Create OS user groups
+  ansible.builtin.group:
+    name: "{{ item.group }}"
+  with_items: "{{ common.users }}"
+
+- name: Create OS users
+  ansible.builtin.user:
+    name: "{{ item.name }}"
+    group: "{{ item.group }}"
+    password: "{{ item.password | password_hash('sha512') }}"
+  with_items: "{{ common.users }}"
+  changed_when: false
+
+- name: Add OS users to the wheel group
+  ansible.builtin.user:
+    name: "{{ item.name }}"
+    groups: wheel
+    append: true
+  with_items: "{{ common.users }}"

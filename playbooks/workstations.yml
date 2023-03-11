@@ -1,0 +1,14 @@
+---
+- name: Set up workstation hosts
+  hosts: workstations
+  become: true
+  pre_tasks:
+    - name: Check OS version is supported
+      ansible.builtin.assert:
+        that:
+          - ansible_facts['distribution'] == "Rocky" and ansible_facts['distribution_major_version'] == "8"
+        fail_msg: |
+          {{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_major_version'] }} is currently not supported
+  roles:
+    - role: common
+      tags: common
