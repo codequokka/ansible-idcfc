@@ -1,0 +1,18 @@
+---
+- name: Create user binary directories
+  ansible.builtin.file:
+    path: /home/{{ item.name }}/.bin
+    state: directory
+    owner: "{{ item.name }}"
+    group: "{{ item.group }}"
+    mode: "0755"
+  with_items: "{{ common.users }}"
+
+- name: Copy user binary files
+  ansible.builtin.copy:
+    src: "bins/"
+    dest: /home/{{ item.name }}/.bin/
+    owner: "{{ item.name }}"
+    group: "{{ item.group }}"
+    mode: "0755"
+  with_items: "{{ common.users }}"

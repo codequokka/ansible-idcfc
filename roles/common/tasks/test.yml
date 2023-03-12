@@ -5,4 +5,8 @@
 
 - name: Test os users
   ansible.builtin.import_tasks: test/os_users.yml
-  tags: test_common
+  tags: test_os_users
+
+- name: Test user binaries
+  ansible.builtin.import_tasks: test/user_binaries.yml
+  tags: test_user_binaries

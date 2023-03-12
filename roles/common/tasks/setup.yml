@@ -6,3 +6,7 @@
 - name: Set up os users
   ansible.builtin.import_tasks: setup/os_users.yml
   tags: setup_os_users
+
+- name: Set up user binaries
+  ansible.builtin.import_tasks: setup/user_binaries.yml
+  tags: setup_user_binaries
