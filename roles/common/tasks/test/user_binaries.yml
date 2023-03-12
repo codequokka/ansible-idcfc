@@ -1,0 +1,9 @@
+---
+- name: Check user binaries exist and users can execute them
+  ansible.builtin.command:
+    cmd: /bin/bash -lc "~/.bin/{{ item.0 }} --version"
+  become_user: "{{ item.1.name }}"
+  with_nested:
+    - [bat, delta, direnv, exa, fd, fzf, jq, lsd, rg, rga, yq]
+    - "{{ common.users }}"
+  changed_when: false
